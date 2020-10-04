@@ -17,8 +17,8 @@ public class Block {
     @Setter
     private String previousHash;
     private String merkleRoot;
-    private MerkleTree merkleTree;
-    private Date timeStamp;
+    private final MerkleTree merkleTree;
+    private final Date timeStamp;
     private int nonce; // Number used only once
 
     public Block(String previousHash) {
@@ -34,7 +34,7 @@ public class Block {
         generateNonce();
     }
 
-    public String calculateHash() {
+    public void calculateHash() {
         merkleRoot = merkleTree.getHash();
         String dataToHash = previousHash + timeStamp + nonce + merkleRoot;
         MessageDigest digest;
@@ -47,12 +47,14 @@ public class Block {
             log.error(e.getMessage());
         }
 
-        StringBuffer buffer = new StringBuffer();
-        for (byte b : bytes) {
-            buffer.append(String.format("%02x", b));
+        StringBuilder buffer = new StringBuilder();
+        if (bytes != null) {
+            for (byte b : bytes) {
+                buffer.append(String.format("%02x", b));
+            }
         }
 
-        return buffer.toString();
+        hash = buffer.toString();
     }
 
     public void AddTransaction(String name, String message) {
