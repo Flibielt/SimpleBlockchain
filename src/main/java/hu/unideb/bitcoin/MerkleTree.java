@@ -62,7 +62,12 @@ public class MerkleTree {
 
         while (end - start > 1) {
             for (int index = start; index < end; index+=2) {
-                hashList.add(hashList.get(index) + hashList.get(index++));
+                String commonHash = hashList.get(index) + hashList.get(index++);
+                byte[] messageDigest = md.digest(commonHash.getBytes());
+                BigInteger no = new BigInteger(1, messageDigest);
+                commonHash = no.toString(16);
+
+                hashList.add(commonHash);
             }
             start = end;
             end = hashList.size();
