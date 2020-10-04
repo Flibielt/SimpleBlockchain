@@ -9,4 +9,9 @@ public class Transaction {
     private String name;
     private Date date;
     private String message;
+
+    @Override
+    public String toString() {
+        return name + date.toString() + message;
+    }
 }
