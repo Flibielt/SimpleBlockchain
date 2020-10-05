@@ -14,9 +14,13 @@ public class Blockchain {
     }
 
     public void addBlock() {
-        blockchain.get(blockchain.size() - 1).calculateHash();
+        blockchain.get(blockchain.size() - 1).mineBlock();
         Block block = new Block(blockchain.get(blockchain.size() - 1).getHash());
         blockchain.add(block);
+    }
+
+    public void mineBlock() {
+        blockchain.get(blockchain.size() - 1).mineBlock();
     }
 
     public void addTransaction(String name, String message) {

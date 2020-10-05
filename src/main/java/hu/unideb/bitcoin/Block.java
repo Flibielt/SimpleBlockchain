@@ -25,16 +25,18 @@ public class Block {
         this.previousHash = previousHash;
         timeStamp = new Date();
         merkleTree = new MerkleTree();
-        generateNonce();
+        hash = "";
+        //mineBlock();
     }
 
     public Block() {
         timeStamp = new Date();
         merkleTree = new MerkleTree();
-        generateNonce();
+        hash = "";
+        //mineBlock();
     }
 
-    public void calculateHash() {
+    public String calculateHash(int prefix) {
         merkleRoot = merkleTree.getHash();
         String dataToHash = previousHash + timeStamp + nonce + merkleRoot;
         MessageDigest digest;
@@ -54,7 +56,7 @@ public class Block {
             }
         }
 
-        hash = buffer.toString();
+        return buffer.toString();
     }
 
     public void AddTransaction(String name, String message) {
@@ -62,17 +64,14 @@ public class Block {
         merkleRoot = merkleTree.getHash();
     }
 
-    private void generateNonce() {
-        int min, max;
-        min = 1000;
-        max = 5000;
-        Random random = new Random();
-        try {
-            nonce = random.ints(min, max + 1).limit(1).findFirst().getAsInt();
-        } catch (Exception e) {
-            log.error("Error with generating nonce");
-            nonce = min;
+    public void mineBlock() {
+        int prefix = 4;
+        String prefixString = new String(new char[prefix]).replace('\0', '0');
+        hash = calculateHash(prefix);
+        while (!hash.substring(0, prefix).equals(prefixString)) {
+            nonce++;
+            hash = calculateHash(prefix);
         }
-
     }
+
 }
