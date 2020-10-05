@@ -13,6 +13,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return name + date.toString() + message;
+        return name + publicKey + date.toString() + message;
     }
 }
