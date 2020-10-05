@@ -54,10 +54,6 @@ public class MerkleTree {
             hashList.add(hashText.toString());
         }
 
-        if (hashList.size() % 2 == 1) {
-            hashList.add(hashList.get(hashList.size() - 1));
-        }
-
         end = hashList.size();
 
         while (end - start > 1) {
