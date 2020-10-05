@@ -27,11 +27,12 @@ public class MerkleTree {
         }
     }
 
-    public void addTransaction(String name, String message) {
+    public void addTransaction(String name, String message, String publicKey) {
         Transaction transaction = new Transaction();
         transaction.setName(name);
         transaction.setMessage(message);
         transaction.setDate(new Date());
+        transaction.setPublicKey(publicKey);
 
         transactions.add(transaction);
         buildTree();

@@ -9,6 +9,7 @@ public class Transaction {
     private String name;
     private Date date;
     private String message;
+    private String publicKey;
 
     @Override
     public String toString() {

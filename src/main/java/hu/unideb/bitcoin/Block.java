@@ -26,14 +26,12 @@ public class Block {
         timeStamp = new Date();
         merkleTree = new MerkleTree();
         hash = "";
-        //mineBlock();
     }
 
     public Block() {
         timeStamp = new Date();
         merkleTree = new MerkleTree();
         hash = "";
-        //mineBlock();
     }
 
     public String calculateHash(int prefix) {
@@ -59,13 +57,13 @@ public class Block {
         return buffer.toString();
     }
 
-    public void AddTransaction(String name, String message) {
-        merkleTree.addTransaction(name, message);
+    public void AddTransaction(String name, String message, String publicKey) {
+        merkleTree.addTransaction(name, message, publicKey);
         merkleRoot = merkleTree.getHash();
     }
 
     public void mineBlock() {
-        int prefix = 4;
+        int prefix = 5;
         String prefixString = new String(new char[prefix]).replace('\0', '0');
         hash = calculateHash(prefix);
         while (!hash.substring(0, prefix).equals(prefixString)) {
