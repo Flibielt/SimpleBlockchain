@@ -9,10 +9,10 @@ public class Transaction {
     private String name;
     private Date date;
     private String message;
-    private String publicKey;
+    private byte[] digitalSignature;
 
     @Override
     public String toString() {
-        return name + publicKey + date.toString() + message;
+        return name + date.toString() + message;
     }
 }

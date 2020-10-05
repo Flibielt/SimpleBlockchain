@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.security.MessageDigest;
 import java.util.Date;
 import java.util.Random;
@@ -57,8 +58,8 @@ public class Block {
         return buffer.toString();
     }
 
-    public void AddTransaction(String name, String message, String publicKey) {
-        merkleTree.addTransaction(name, message, publicKey);
+    public void AddTransaction(String name, String message, Key privateKey) {
+        merkleTree.addTransaction(name, message, privateKey);
         merkleRoot = merkleTree.getHash();
     }
 

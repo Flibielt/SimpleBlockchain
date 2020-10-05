@@ -1,5 +1,6 @@
 package hu.unideb.bitcoin;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Blockchain {
         blockchain.get(blockchain.size() - 1).mineBlock();
     }
 
-    public void addTransaction(String name, String message, String publicKey) {
-        blockchain.get(blockchain.size() - 1).AddTransaction(name, message, publicKey);
+    public void addTransaction(String name, String message, Key privateKey) {
+        blockchain.get(blockchain.size() - 1).AddTransaction(name, message, privateKey);
     }
 }

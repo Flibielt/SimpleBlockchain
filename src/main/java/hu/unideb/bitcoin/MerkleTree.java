@@ -3,7 +3,9 @@ package hu.unideb.bitcoin;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.crypto.Cipher;
 import java.math.BigInteger;
+import java.security.Key;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,12 +29,22 @@ public class MerkleTree {
         }
     }
 
-    public void addTransaction(String name, String message, String publicKey) {
+    public void addTransaction(String name, String message, Key privateKey) {
         Transaction transaction = new Transaction();
         transaction.setName(name);
         transaction.setMessage(message);
         transaction.setDate(new Date());
-        transaction.setPublicKey(publicKey);
+        byte[] messageHash = md.digest(transaction.toString().getBytes());
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+            cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+            byte[] digitalSignature = cipher.doFinal(messageHash);
+            transaction.setDigitalSignature(digitalSignature);
+        } catch (Exception e) {
+            log.error("Cannot create digital signature");
+        }
+
 
         transactions.add(transaction);
         buildTree();
