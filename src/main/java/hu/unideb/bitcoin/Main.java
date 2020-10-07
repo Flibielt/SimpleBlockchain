@@ -20,15 +20,15 @@ public class Main {
             System.out.println("Cannot generate key pair");
         }
 
-        blockchain.addTransaction("sender1", "message1", keyPair1.getPrivate());
-        blockchain.addTransaction("sender2", "message2", keyPair2.getPrivate());
+        blockchain.addTransaction("sender1", "message1", keyPair1.getPublic());
+        blockchain.addTransaction("sender2", "message2", keyPair2.getPublic());
         blockchain.mineBlock();
         System.out.println("Block added");
 
         blockchain.addBlock();
 
-        blockchain.addTransaction("sender3", "message3", keyPair1.getPrivate());
-        blockchain.addTransaction("sender4", "message4", keyPair2.getPrivate());
+        blockchain.addTransaction("sender3", "message3", keyPair1.getPublic());
+        blockchain.addTransaction("sender4", "message4", keyPair2.getPublic());
         blockchain.mineBlock();
         System.out.println("Block added");
     }

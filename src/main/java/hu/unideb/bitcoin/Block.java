@@ -58,8 +58,8 @@ public class Block {
         return buffer.toString();
     }
 
-    public void AddTransaction(String name, String message, Key privateKey) {
-        merkleTree.addTransaction(name, message, privateKey);
+    public void AddTransaction(String name, String message, Key publicKey) {
+        merkleTree.addTransaction(name, message, publicKey);
         merkleRoot = merkleTree.getHash();
     }
 

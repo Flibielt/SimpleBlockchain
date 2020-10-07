@@ -24,7 +24,7 @@ public class Blockchain {
         blockchain.get(blockchain.size() - 1).mineBlock();
     }
 
-    public void addTransaction(String name, String message, Key privateKey) {
-        blockchain.get(blockchain.size() - 1).AddTransaction(name, message, privateKey);
+    public void addTransaction(String name, String message, Key publicKey) {
+        blockchain.get(blockchain.size() - 1).AddTransaction(name, message, publicKey);
     }
 }
